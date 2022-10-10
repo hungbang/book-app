@@ -9,10 +9,10 @@ pipeline {
             jenkins: agent
         spec:
           containers:
-          - name: maven-3-8-6-openjdk-8
-            image: nexus01.evizi.com:8123/maven-evz:3.8.6-openjdk-8
+          - name: maven
+            image: maven:alpine
             command:
-            - sleep
+            - cat
             tty: true
         '''
     }
@@ -20,7 +20,7 @@ pipeline {
   stages {
     stage('Install dependencies') {
       steps {
-        container('maven-3-8-6-openjdk-8') {
+        container('maven') {
           sh 'mvn clean install'
         }
       }
