@@ -12,7 +12,7 @@ pipeline {
           - name: maven-3-8-6-openjdk-8
             image: nexus01.evizi.com:8123/maven-evz:3.8.6-openjdk-8
             command:
-            - cat
+            - sleep
             tty: true
         '''
     }
