@@ -31,7 +31,7 @@ pipeline {
             container('maven'){
                 withSonarQubeEnv('SonarQube'){
                     sh '''
-                        mvn -f pom.xml sonar:sonar
+                        mvn -f pom.xml sonar:sonar -Dsonar.links.ci=${JOB_URL}
                     '''
                 }
             }
