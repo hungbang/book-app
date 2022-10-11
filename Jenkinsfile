@@ -18,7 +18,7 @@ pipeline {
     }
   }
   stages {
-    stage('Install dependencies') {
+    stage('Build Maven') {
       steps {
         container('maven') {
           sh 'mvn clean install'
@@ -26,15 +26,23 @@ pipeline {
       }
     }
 
+    stage('Security tool Scans'){
+        steps {
+            withSonarQubeEnv('SonarQube'){
+                sh '''
+                    mvn -f pom.xml sonar:sonar
+                '''
+            }
+        }
+    }
+
     stage('Trigger deploy') {
       when {
         branch "master"
       }
       steps {
-        build job: 'demo',
-          parameters: [
-            string(name: 'GIT_BRANCH_NAME', value: env.BRANCH_NAME)
-          ]
+        sh '''
+        '''
       }
     }
   }
