@@ -28,10 +28,12 @@ pipeline {
 
     stage('Security tool Scans'){
         steps {
-            withSonarQubeEnv('SonarQube'){
-                sh '''
-                    mvn -f pom.xml sonar:sonar
-                '''
+            container('maven'){
+                withSonarQubeEnv('SonarQube'){
+                    sh '''
+                        mvn -f pom.xml sonar:sonar
+                    '''
+                }
             }
         }
     }
