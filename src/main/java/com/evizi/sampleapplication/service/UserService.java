@@ -1,5 +1,6 @@
 package com.evizi.sampleapplication.service;
 
+import com.evizi.sampleapplication.model.User;
 import com.evizi.sampleapplication.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public void save(User userPostDtoToUser) {
+        userRepository.save(userPostDtoToUser);
+    }
+
+    public User findById(int id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

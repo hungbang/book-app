@@ -1,8 +1,8 @@
 package com.evizi.sampleapplication.controller;
 
-import com.evizi.sampleapplication.mapstruct.mappers.dto.AuthorAllDto;
 import com.evizi.sampleapplication.mapstruct.mappers.MapStructMapper;
-import com.evizi.sampleapplication.repository.AuthorRepository;
+import com.evizi.sampleapplication.mapstruct.mappers.dto.AuthorAllDto;
+import com.evizi.sampleapplication.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +18,22 @@ public class AuthorController {
 
     private final MapStructMapper mapstructMapper;
 
-    private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
 
     @Autowired
     public AuthorController(
             MapStructMapper mapstructMapper,
-            AuthorRepository authorRepository
+            AuthorService authorService
     ) {
         this.mapstructMapper = mapstructMapper;
-        this.authorRepository = authorRepository;
+        this.authorService = authorService;
     }
 
     @GetMapping()
     public ResponseEntity<List<AuthorAllDto>> getAll() {
         return new ResponseEntity<>(
                 mapstructMapper.authorsToAuthorAllDtos(
-                        authorRepository.findAll()
+                        authorService.findAll()
                 ),
                 HttpStatus.OK
         );

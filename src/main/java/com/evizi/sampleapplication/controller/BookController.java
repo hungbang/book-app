@@ -1,8 +1,8 @@
 package com.evizi.sampleapplication.controller;
 
-import com.evizi.sampleapplication.mapstruct.mappers.dto.BookDto;
 import com.evizi.sampleapplication.mapstruct.mappers.MapStructMapper;
-import com.evizi.sampleapplication.repository.BookRepository;
+import com.evizi.sampleapplication.mapstruct.mappers.dto.BookDto;
+import com.evizi.sampleapplication.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/books")
 public class BookController {
     private final MapStructMapper mapstructMapper;
-    private final BookRepository bookRepository;
-
+    private final BookService bookService;
     @Autowired
     public BookController(
             MapStructMapper mapstructMapper,
-            BookRepository bookRepository
-    ) {
+            BookService bookService) {
         this.mapstructMapper = mapstructMapper;
-        this.bookRepository = bookRepository;
+        this.bookService = bookService;
     }
 
     @GetMapping("/{id}")
@@ -32,10 +30,9 @@ public class BookController {
     ) {
         return new ResponseEntity<>(
                 mapstructMapper.bookToBookDto(
-                        bookRepository.findById(id).get()
+                        bookService.findById(id)
                 ),
                 HttpStatus.OK
         );
     }
-
 }

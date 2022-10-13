@@ -15,4 +15,8 @@ public class BookService {
     public Book createBook(Book book) {
         return bookRepository.save(book);
     }
+
+    public Book findById(int id) {
+        return bookRepository.findById(id).orElse(null);
+    }
 }

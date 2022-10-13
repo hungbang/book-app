@@ -1,9 +1,9 @@
 package com.evizi.sampleapplication.controller;
 
+import com.evizi.sampleapplication.mapstruct.mappers.MapStructMapper;
 import com.evizi.sampleapplication.mapstruct.mappers.dto.UserGetDto;
 import com.evizi.sampleapplication.mapstruct.mappers.dto.UserPostDto;
-import com.evizi.sampleapplication.mapstruct.mappers.MapStructMapper;
-import com.evizi.sampleapplication.repository.UserRepository;
+import com.evizi.sampleapplication.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ import javax.validation.Valid;
 public class UserController {
     private final MapStructMapper mapstructMapper;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(MapStructMapper mapstructMapper, UserRepository userRepository) {
+    public UserController(MapStructMapper mapstructMapper, UserService userService) {
         this.mapstructMapper = mapstructMapper;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<Void> create(
             @Valid @RequestBody UserPostDto userPostDto
     ) {
-        userRepository.save(
+        userService.save(
                 mapstructMapper.userPostDtoToUser(userPostDto)
         );
 
@@ -44,7 +44,7 @@ public class UserController {
     ) {
         return new ResponseEntity<>(
                 mapstructMapper.userToUserGetDto(
-                        userRepository.findById(id).get()
+                        userService.findById(id)
                 ),
                 HttpStatus.OK
         );

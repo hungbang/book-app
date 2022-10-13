@@ -10,6 +10,7 @@ import com.evizi.sampleapplication.model.Author;
 import com.evizi.sampleapplication.model.Book;
 import com.evizi.sampleapplication.model.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
         componentModel = "spring"
 )
 public interface MapStructMapper {
-
+    MapStructMapper INSTANCE = Mappers.getMapper( MapStructMapper.class );
     BookSlimDto bookToBookSlimDto(Book book);
 
     BookDto bookToBookDto(Book book);
