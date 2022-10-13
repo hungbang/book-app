@@ -29,7 +29,7 @@ pipeline {
     stage('Security tool Scans'){
         steps {
             container('maven'){
-                withSonarQubeEnv('SonarQube'){
+                withSonarQubeEnv('Evizi Sonar'){
                     sh '''
                         mvn -f pom.xml sonar:sonar -Dsonar.links.ci=${JOB_URL}
                     '''
