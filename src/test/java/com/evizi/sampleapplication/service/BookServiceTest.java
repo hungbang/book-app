@@ -27,7 +27,7 @@ class BookServiceTest {
     BookService bookService;
 
     @Test
-    void createBook() {
+    void test_createBook_success() {
         //GIVEN
         String title = "Software Testing";
         String authorName = "me";
@@ -49,7 +49,7 @@ class BookServiceTest {
     }
 
     @Test
-    void findById() {
+    void test_findById_success() {
         //GIVEN
         String title = "Software Testing";
         String authorName = "me";
