@@ -163,7 +163,7 @@
                         <exclude>**/*IT*</exclude>
                         <exclude>**/*IntTest*</exclude>
                     </excludes>
-                    <argLine>-Xmx1024m</argLine>
+<!--                    <argLine>-Xmx1024m</argLine>-->
                 </configuration>
             </plugin>
             <plugin>
