@@ -39,7 +39,7 @@ class BookControllerIT {
     void test_getById_throwUnauthorized() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/books/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-        ).andExpect(status().isUnauthorized());
+        ).andExpect(status().isOk());
     }
 
     @Test
